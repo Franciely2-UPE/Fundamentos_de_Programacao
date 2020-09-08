@@ -1,8 +1,15 @@
   import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app_fund_programacao/splashs.dart';
-import 'package:flutter_app_fund_programacao/home.dart';
 
-  void main()=> runApp(MyApp());
+
+  void main(){
+    WidgetsFlutterBinding.ensureInitialized();
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+    runApp(MyApp());
+  }
+
 
   class MyApp extends StatelessWidget{
     @override
