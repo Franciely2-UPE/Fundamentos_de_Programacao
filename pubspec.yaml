@@ -49,6 +49,18 @@ flutter:
    - imagens/Tela1.png
    - imagens/bandeira.png
    - imagens/Ativ.png
+   - imagens/1.png
+   - imagens/codicao.png
+   - imagens/diga.png
+   - imagens/espere.png
+   - imagens/junte.png
+   - imagens/maior.png
+   - imagens/mova.png
+   - imagens/p.cenario.png
+   - imagens/pergunta.png
+   - imagens/som.png
+   - imagens/tocar_borda.png
+   - assets/blocos.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

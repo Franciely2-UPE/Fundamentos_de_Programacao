@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app_fund_programacao/quizpage.dart';
 
   class tutorialpage extends StatefulWidget{
@@ -10,6 +11,17 @@ import 'package:flutter_app_fund_programacao/quizpage.dart';
     List<String> imagens = [
       "imagens/bandeira.png",
       "imagens/1.png",
+      "imagens/codicao.png",
+      "imagens/diga.png",
+      "imagens/espere.png",
+      "imagens/junte.png",
+      "imagens/maior.png",
+      "imagens/mova.png",
+      "imagens/p.cenario.png",
+      "imagens/pergunta.png",
+      "imagens/som.png",
+      "imagens/tocar_borda.png",
+
 
     ];
 
@@ -21,7 +33,7 @@ import 'package:flutter_app_fund_programacao/quizpage.dart';
         child: InkWell(
           onTap:() {
             Navigator.of(context).pushReplacement(MaterialPageRoute(
-              builder: (context) => quizpage(),
+              builder: (context) => blocojson(),
             ));
           },
           child: Material(
@@ -96,6 +108,19 @@ import 'package:flutter_app_fund_programacao/quizpage.dart';
           children: <Widget>[
             customcard("BLOCO DE EVENTOS", imagens[0]),
             customcard("BLOCO DE EVENTOS",imagens[1]),
+            customcard("BLOCO DE CONTROLE",imagens[2]),
+            customcard("BLOCO DE APARÊNCIA",imagens[3]),
+            customcard("BLOCO DE CONTROLE",imagens[4]),
+            customcard("BLOCO DE OPERADORES",imagens[5]),
+            customcard("BLOCO DE OPERADORES",imagens[6]),
+            customcard("BLOCO DE MOVIMENTO",imagens[7]),
+            customcard("BLOCO DE APARÊNCIA",imagens[8]),
+            customcard("BLOCO DE SENSORES",imagens[9]),
+            customcard("BLOCO DE SONS",imagens[10]),
+            customcard("BLOCO DE MOVIMENTO",imagens[11]),
+
+
+
           ],
         ),
       );

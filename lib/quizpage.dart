@@ -1,31 +1,86 @@
   import 'dart:convert';
   import 'package:flutter/material.dart';
-  
-  class quizpage extends StatefulWidget{
-    @override
-    _quizpageState createState() => _quizpageState();
+  import 'package:flutter/services.dart';
 
+  class blocojson extends StatelessWidget {
+    @ override
+    Widget build (BuildContext context) {
+      return FutureBuilder(
+        future: DefaultAssetBundle.of(context).loadString("assets/blocos.json"),
+        builder: (context, snapshot) {
+          List dados = json.decode(snapshot.data.toString());
+          if (dados == null) {
+            return Scaffold(
+              body: Center(
+                child: Text(
+                  "Loading",
+                ),
+              ),
+            );
+          }else{
+            return quizpage(dados : dados);
+          }
+        },
+      );
+    }
+  }
+  class quizpage extends StatefulWidget{
+    var dados;
+
+    quizpage({Key key, @required this.dados}) : super(key : key);
+    @override
+    _quizpageState createState() => _quizpageState(dados);
   }
   class _quizpageState extends State<quizpage>{
-    Widget choicebutton(string){
+    var dados;
+    _quizpageState(this.dados);
+
+    Color colortoshow = Colors.blue;
+    Color right = Colors.green;
+    Color wrong = Colors.red;
+    int marks = 0;
+
+
+    Map<String, Color> btncolor = {
+      "a" : Colors.blue,
+      "b" : Colors.blue,
+      "c" : Colors.blue,
+    };
+
+    void checkanswer (String resp){
+      if(dados[2]["1"] == dados[1]["1"][resp]){
+        marks = marks + 5;
+        colortoshow = right;
+
+      }else{
+        colortoshow = wrong;
+      }
+      setState(() {
+        btncolor[resp] = colortoshow;
+
+      });
+    }
+
+    Widget choicebutton(String resp){
       return Padding(
         padding: EdgeInsets.symmetric(
           vertical: 10.0,
           horizontal: 20.0,
         ),
         child: MaterialButton(
-          onPressed: (){},
+          onPressed: () => checkanswer(resp),
           child: Text(
-            "Instrução de controle.",
+           dados[1]["1"][resp],
             style: TextStyle(
               color: Colors.white,
               fontFamily: "Alike",
               fontSize: 16.0,
             ),
+            maxLines: 1,
           ),
-          color: Colors.green,
-          highlightColor: Colors.green[700],
-          splashColor: Colors.green[700],
+          color: btncolor[resp],
+          highlightColor: Colors.blue[700],
+          splashColor: Colors.blue[700],
           minWidth: 200.0,
           height: 45.0,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -34,7 +89,32 @@
     }
     @override
     Widget build (BuildContext context){
-      return Scaffold(
+      return WillPopScope(
+        onWillPop: (){
+          return showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text(
+                "Quiz",
+              ),
+              content: Text(
+                "Você não pode voltar."
+              ),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    "OK",
+                  ),
+                )
+              ],
+            )
+          );
+
+        },
+      child: Scaffold(
         body: Column(
           children: <Widget>[
             Image(image: AssetImage("imagens/Ativ.png")),
@@ -45,13 +125,13 @@
                 alignment: Alignment.bottomLeft,
 
                 child: Text(
-                  "Qual instrução possui o bloco de diálogo?",
+                  dados[0]["1"],
                   style: TextStyle(
                     fontSize: 18.0,
                   ),
                 ),
                 decoration: BoxDecoration(
-                  color: Colors.red,
+                  color: Colors.greenAccent,
                 ),
               ),
             ),
@@ -59,10 +139,11 @@
               flex: 6,
               child: Container(
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    choicebutton("Instrução de controle"),
-                    choicebutton("Instrução de aparência"),
-                    choicebutton("Instrução de Eventos"),
+                    choicebutton('a'),
+                    choicebutton('b'),
+                    choicebutton('c'),
                   ],
                 ),
               ),
@@ -70,8 +151,15 @@
             Expanded(
               flex: 1,
               child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.teal,
+                alignment: Alignment.topCenter,
+                child: Center(
+                  child: Text(
+                    "30",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontFamily: 'Times New Roman',
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -79,6 +167,9 @@
 
         ),
 
+
+      ),
       );
+
     }
   }
