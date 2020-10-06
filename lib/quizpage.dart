@@ -1,4 +1,5 @@
-  import 'dart:convert';
+  import 'dart:async';
+import 'dart:convert';
   import 'package:flutter/material.dart';
   import 'package:flutter/services.dart';
 
@@ -39,13 +40,52 @@
     Color right = Colors.green;
     Color wrong = Colors.red;
     int marks = 0;
+    int i = 1;
+    int timer = 30;
+    String showtimer = "30";
 
 
-    Map<String, Color> btncolor = {
+    Map<String, Color > btncolor = {
       "a" : Colors.blue,
       "b" : Colors.blue,
       "c" : Colors.blue,
     };
+    @override
+    void iniState(){
+      starttimer();
+      super.initState();
+    }
+
+    void starttimer() async{
+      const onesec = Duration(seconds: 1);
+      Timer.periodic(onesec, (Timer t) {
+        setState(() {
+          if(timer < 1){
+            t.cancel();
+            nextquestion();
+          }else{
+            timer = timer - 1;
+          }
+          showtimer = timer.toString();
+
+        });
+      });
+    }
+
+    void nextquestion (){
+      timer = 30;
+      setState(() {
+       if (i < 5){
+         i++;
+
+       }else{
+
+       }
+       btncolor["a"] = Colors.blue;
+       btncolor["b"] = Colors.blue;
+       btncolor["c"] = Colors.blue;
+     });
+    }
 
     void checkanswer (String resp){
       if(dados[2]["1"] == dados[1]["1"][resp]){
@@ -59,6 +99,7 @@
         btncolor[resp] = colortoshow;
 
       });
+      Timer(Duration(seconds: 2),nextquestion);
     }
 
     Widget choicebutton(String resp){
@@ -70,7 +111,7 @@
         child: MaterialButton(
           onPressed: () => checkanswer(resp),
           child: Text(
-           dados[1]["1"][resp],
+           dados[1][i.toString()][resp],
             style: TextStyle(
               color: Colors.white,
               fontFamily: "Alike",
@@ -125,7 +166,7 @@
                 alignment: Alignment.bottomLeft,
 
                 child: Text(
-                  dados[0]["1"],
+                  dados[0][i.toString()],
                   style: TextStyle(
                     fontSize: 18.0,
                   ),
@@ -154,7 +195,7 @@
                 alignment: Alignment.topCenter,
                 child: Center(
                   child: Text(
-                    "30",
+                    showtimer,
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontFamily: 'Times New Roman',
