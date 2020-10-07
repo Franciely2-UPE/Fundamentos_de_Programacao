@@ -1,7 +1,8 @@
   import 'dart:async';
-import 'dart:convert';
+  import 'dart:convert';
   import 'package:flutter/material.dart';
-  import 'package:flutter/services.dart';
+  import 'package:flutter_app_fund_programacao/resultpage.dart';
+
 
   class blocojson extends StatelessWidget {
     @ override
@@ -27,16 +28,31 @@ import 'dart:convert';
   }
   class quizpage extends StatefulWidget{
     var dados;
-
     quizpage({Key key, @required this.dados}) : super(key : key);
     @override
     _quizpageState createState() => _quizpageState(dados);
   }
   class _quizpageState extends State<quizpage>{
+    List<String> imagens = [
+      "imagens/bandeira.png",
+      "imagens/1.png",
+      "imagens/codicao.png",
+      "imagens/diga.png",
+      "imagens/espere.png",
+      "imagens/junte.png",
+      "imagens/maior.png",
+      "imagens/mova.png",
+      "imagens/p.cenario.png",
+      "imagens/pergunta.png",
+      "imagens/som.png",
+      "imagens/tocar_borda.png",
+
+
+    ];
     var dados;
     _quizpageState(this.dados);
 
-    Color colortoshow = Colors.blue;
+    Color colortoshow = Colors.indigo;
     Color right = Colors.green;
     Color wrong = Colors.red;
     int marks = 0;
@@ -44,62 +60,72 @@ import 'dart:convert';
     int timer = 30;
     String showtimer = "30";
 
-
-    Map<String, Color > btncolor = {
-      "a" : Colors.blue,
-      "b" : Colors.blue,
-      "c" : Colors.blue,
+    Map<String, Color> btncolor = {
+      "a" : Colors.indigo,
+      "b" : Colors.indigo,
+      "c" : Colors.indigo,
     };
+
+    bool canceltimer = false;
+
     @override
-    void iniState(){
+    void initState(){
       starttimer();
       super.initState();
     }
 
-    void starttimer() async{
+    void starttimer()async{
       const onesec = Duration(seconds: 1);
       Timer.periodic(onesec, (Timer t) {
         setState(() {
           if(timer < 1){
             t.cancel();
             nextquestion();
+          }else if(canceltimer == true){
+            t.cancel();
+
           }else{
-            timer = timer - 1;
+            timer = timer -1;
           }
           showtimer = timer.toString();
-
         });
       });
     }
 
-    void nextquestion (){
+    void nextquestion () {
+      canceltimer = false;
       timer = 30;
       setState(() {
-       if (i < 5){
-         i++;
+        if(i < 10){
+          i++;
+        } else {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (context) =>resultpage(marks : marks),
+          ));
 
-       }else{
+        }
+        btncolor["a"] = Colors.indigo;
+        btncolor["b"] = Colors.indigo;
+        btncolor["c"] = Colors.indigo;
 
-       }
-       btncolor["a"] = Colors.blue;
-       btncolor["b"] = Colors.blue;
-       btncolor["c"] = Colors.blue;
-     });
+      });
+      starttimer();
     }
 
     void checkanswer (String resp){
       if(dados[2]["1"] == dados[1]["1"][resp]){
-        marks = marks + 5;
+        marks = marks + 10;
         colortoshow = right;
-
       }else{
         colortoshow = wrong;
       }
       setState(() {
         btncolor[resp] = colortoshow;
-
+        canceltimer = true;
       });
-      Timer(Duration(seconds: 2),nextquestion);
+
+      Timer(Duration(seconds: 2), nextquestion);
+
     }
 
     Widget choicebutton(String resp){
@@ -120,8 +146,8 @@ import 'dart:convert';
             maxLines: 1,
           ),
           color: btncolor[resp],
-          highlightColor: Colors.blue[700],
-          splashColor: Colors.blue[700],
+          splashColor: Colors.indigo[700],
+          highlightColor: Colors.indigo[700],
           minWidth: 200.0,
           height: 45.0,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
@@ -197,6 +223,7 @@ import 'dart:convert';
                   child: Text(
                     showtimer,
                     style: TextStyle(
+                      fontSize: 35.0,
                       fontWeight: FontWeight.w700,
                       fontFamily: 'Times New Roman',
                     ),

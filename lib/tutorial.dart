@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_app_fund_programacao/quizpage.dart';
 
   class tutorialpage extends StatefulWidget{

@@ -60,6 +60,9 @@ flutter:
    - imagens/pergunta.png
    - imagens/som.png
    - imagens/tocar_borda.png
+   - imagens/bad.png
+   - imagens/success.png
+   - imagens/good.png
    - assets/blocos.json
   #   - images/a_dot_ham.jpeg
 
