@@ -32,6 +32,8 @@
     @override
     _quizpageState createState() => _quizpageState(dados);
   }
+
+
   class _quizpageState extends State<quizpage>{
     List<String> imagens = [
       "imagens/bandeira.png",
@@ -64,6 +66,7 @@
       "a" : Colors.indigo,
       "b" : Colors.indigo,
       "c" : Colors.indigo,
+      "d" : Colors.indigo,
     };
 
     bool canceltimer = false;
@@ -107,6 +110,7 @@
         btncolor["a"] = Colors.indigo;
         btncolor["b"] = Colors.indigo;
         btncolor["c"] = Colors.indigo;
+        btncolor["d"] = Colors.indigo;
 
       });
       starttimer();
@@ -182,15 +186,14 @@
 
         },
       child: Scaffold(
-        body: Column(
+        body: ListView(
           children: <Widget>[
-            Image(image: AssetImage("imagens/Ativ.png")),
+            Image(image: AssetImage("imagens/desc.png")),
             Expanded(
               flex: 3,
               child: Container(
                 padding: EdgeInsets.all(15.0),
                 alignment: Alignment.bottomLeft,
-
                 child: Text(
                   dados[0][i.toString()],
                   style: TextStyle(
@@ -211,6 +214,7 @@
                     choicebutton('a'),
                     choicebutton('b'),
                     choicebutton('c'),
+                    choicebutton('d'),
                   ],
                 ),
               ),

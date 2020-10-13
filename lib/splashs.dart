@@ -11,14 +11,18 @@ class _splashscreenState extends State<splashscreen>{
   @override
   void initState() {
     super.initState();
-    Timer(Duration(seconds: 3), () {
+
+    Timer(Duration(seconds: 4), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
         builder: (context) => HomePage(),
       ));
     });
+
   }
+
     @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Colors.indigoAccent,
       body: Center(
@@ -28,7 +32,6 @@ class _splashscreenState extends State<splashscreen>{
             fontSize: 50.0,
             color: Colors.white,
           ),
-
         ),
       ),
     );

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_fund_programacao/tutorial.dart';
+
+
 
 
 class HomePage extends StatefulWidget{
@@ -20,7 +23,7 @@ class _HomePageState extends State<HomePage>{
 
 
       body: Container(
-        alignment: Alignment.topCenter,
+        alignment: Alignment.centerRight,
         child: RaisedButton(
           onPressed: (){
             Navigator.push(
@@ -35,7 +38,7 @@ class _HomePageState extends State<HomePage>{
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Image(image: AssetImage("imagens/Tela1.png"))
+            Image(image: AssetImage("imagens/INIC.png"))
           ],
 
         ),

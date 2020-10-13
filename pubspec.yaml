@@ -63,7 +63,13 @@ flutter:
    - imagens/bad.png
    - imagens/success.png
    - imagens/good.png
+   - imagens/1.1.png
+   - imagens/1.2.png
+   - imagens/inicial.png
+   - imagens/INIC.png
+   - imagens/desc.png
    - assets/blocos.json
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
