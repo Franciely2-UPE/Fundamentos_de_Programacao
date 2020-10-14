@@ -64,6 +64,9 @@ Navegação entre todas as telas presentes no App.
 
 ![Navegação](https://github.com/FrancielyAlves/Fundamentos_de_Programacao/blob/master/Navega%C3%A7%C3%A3o.png)
 
+### Assistir ao vídeo de apresentação do aplicativo
+[![Quiz: Programação em Blocos](http://img.youtube.com/vi/KRtGHCTMM64/0.jpg)](http://www.youtube.com/watch?v=KRtGHCTMM64 "Vídeo de Apresentação do Aplicativo")
+
 
 
 
